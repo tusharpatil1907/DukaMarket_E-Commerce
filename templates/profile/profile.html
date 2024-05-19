@@ -1,0 +1,101 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}{% if message.tags == 'success' %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+              <h5>{{ user.first_name }} {{ user.last_name }}</h5>
+              <p>{{ user.username }}</p>
+              <i class="far fa-edit mb-5"></i>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                  <form method="POST">
+                      {% csrf_token %}
+                <h6>Personal Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Email</h6>
+                    <input name='email' class="text-muted form-control" value="{{ user.email }}">
+{#                    <p class="text-muted">info@example.com</p>#}
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Username</h6>
+                      <input name='username' class="text-muted form-control" value="{{ user.username }}">
+{#                    <p class="text-muted">123 456 789</p>#}
+                  </div>
+                </div>
+                 <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>First name</h6>
+                      <input name='first_name' class="text-muted form-control" value="{{ user.first_name }}">
+{#                    <p class="text-muted">Lorem ipsum</p>#}
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Last Name</h6>
+                      <input name='last_name' class="text-muted form-control" value="{{ user.last_name }}">
+{#                    <p class="text-muted">Dolor sit amet</p>#}
+                  </div>
+                </div>
+                <h6>Additional details Change password if required</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Change password</h6>
+                      <input name ='changepass' class="text-muted form-control" placeholder="change password">
+{#                    <p class="text-muted">Lorem ipsum</p>#}
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Confirm password</h6>
+                      <input name="confirm_changepass" class="text-muted form-control" value="">
+{#                    <p class="text-muted">Dolor sit amet</p>#}
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-warning">Save changes</button>
+                    <a href="/" class=" btn btn-outline-success ">Home</a>
+                    <a href="/logout/" class=" btn btn-outline-danger ">Logout</a>
+{#                  <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>#}
+{#                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>#}
+{#                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>#}
+                </div>
+
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
